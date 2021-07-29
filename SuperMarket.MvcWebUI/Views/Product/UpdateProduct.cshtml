@@ -1,0 +1,30 @@
+﻿@model ProductViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+<form asp-controller="Product" asp-action="UpdateProduct">
+    @*<h1>  @ViewBag.ResultMessages</h1>*@
+    <label >Ürün Ad:</label><br>
+    <input asp-for="@Model.Product.Id" type="hidden"><br>
+    <input asp-for="@Model.Product.ProductName"  type="text"><br>
+
+    <label>Kategori:</label><br>
+    <input asp-for="@Model.Product.Category" type="text"><br><br>
+
+    <label>Birim:</label><br>
+    <input asp-for="@Model.Product.QuantityPerUnit" type="text"><br><br>
+
+    <label>Fiyat:</label><br>
+    <input asp-for="@Model.Product.UnitPrice" step="any" ><br><br>
+
+    <label>Stok Adedi :</label><br>
+    <input asp-for="@Model.Product.StockAmount" type="number"><br><br>
+
+    <button id="addProduct" onclick="added()" class="btn btn-warning" type="submit">
+        Güncelle
+    </button>
+</form>

@@ -1,0 +1,99 @@
+﻿@model BasketViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+
+            <th scope="col">Ürün Adı</th>
+            <th scope="col">Birim Fiyat</th>
+            <th scope="col">Adet</th>
+            <th scope="col">Toplam Fiyat</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var basketDto in Model.BasketDtos)
+        {
+            @if (basketDto.BasketDetail != null)
+            {
+                <tr>
+
+                    <td>@basketDto.Product.ProductName</td>
+                    <td>@basketDto.BasketDetail.Price</td>
+                    <td>@basketDto.BasketDetail.Amount</td>
+                    <td>@basketDto.BasketDetail.TotalPrice</td>
+                    <td>
+                        <a type="button"
+                           asp-controller="Basket"
+                           asp-action="RemoveToBasketDetail"
+                           asp-route-basketDetailId="@basketDto.BasketDetail.Id" class="btn btn-xs btn-danger">
+                            Sepetten Çıkar
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-4">
+            <p class="badge-light">Sepet Adedi :</p>
+            <p class="badge-light">Sepet Tutarı:</p>
+
+        </div>
+        <div class="col-4">
+            @{ var basket = Model.BasketDtos;}
+            @if (basket.Count != 0)
+            {
+                <p>@basket.FirstOrDefault().Basket.ProductCount</p>
+                <p>@basket.FirstOrDefault().Basket.TotalPrice</p>
+            }
+            else
+            {
+                <p>0</p>
+                <p>0</p>
+            }
+
+        </div>
+    </div>
+    @if (basket.Count != 0)
+    {
+        @if (basket.FirstOrDefault().Basket.TotalPrice!=0)
+        {
+            <div class="row justify-content-end">
+                <div class="col-4">
+
+                    <p>
+                        <a type="button"
+                           asp-controller="Order"
+                           asp-action="CreateOrder"
+                           asp-route-paymentType="1" class="btn btn-xs btn-info">
+                            Kredi Kartı
+                        </a>
+                    </p>
+                    <p>
+                        <a type="button"
+                           asp-controller="Order"
+                           asp-action="CreateOrder"
+                           asp-route-paymentType="2" class="btn btn-xs btn-success">
+                            Havale
+                        </a>
+                    </p>
+
+
+                </div>
+            </div>
+ 
+        }
+        
+    }
+
+
+</div>
