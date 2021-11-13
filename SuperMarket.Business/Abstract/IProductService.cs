@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Utilities.Results;
+﻿using Core.Utilities.Results;
 using SuperMarket.Entities.Concrete;
+using System.Collections.Generic;
 
 namespace SuperMarket.Business.Abstract
 {
@@ -11,9 +9,12 @@ namespace SuperMarket.Business.Abstract
         IDataResult<Product> GetById(int productId);
 
         IDataResult<List<Product>> GetList();
-     
+
         IResult Add(Product product);
+
         IResult Remove(Product product);
+        IResult RemoveByProductId(int productId);
+
         IResult Update(Product product);
     }
 }

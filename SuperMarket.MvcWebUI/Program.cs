@@ -25,8 +25,6 @@ namespace SuperMarket.MvcWebUI
                     }
                 )
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-
-
         }
     }
 }

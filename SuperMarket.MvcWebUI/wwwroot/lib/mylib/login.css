@@ -9,7 +9,6 @@ body {
     display: grid;
     justify-items: center;
     align-items: center;
-
 }
 
 #main-holder {
@@ -20,11 +19,7 @@ body {
     align-items: center;
     background-color: white;
     border-radius: 7px;
-   
 }
-
-
-
 
 #login-form {
     align-self: flex-start;
@@ -58,6 +53,3 @@ body {
     cursor: pointer;
     outline: none;
 }
-
-
-                                     

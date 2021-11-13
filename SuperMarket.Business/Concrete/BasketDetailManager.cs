@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Core.Utilities.Results;
+﻿using Core.Utilities.Results;
 using SuperMarket.Business.Abstract;
 using SuperMarket.DataAccess.Abstract;
 using SuperMarket.Entities.Concrete;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SuperMarket.Business.Concrete
 {
@@ -43,7 +43,7 @@ namespace SuperMarket.Business.Concrete
         public IDataResult<List<BasketDetail>> AddToBasketDetail(int productId, int basketId)
         {
             var basketDetailCheckProduct = CheckBasketDetailToProduct(productId, basketId).Data;
-            if (basketDetailCheckProduct.FirstOrDefault(bd=>bd.ProductId==productId)!=null)
+            if (basketDetailCheckProduct.FirstOrDefault(bd => bd.ProductId == productId) != null)
                 return new SuccessDataResult<List<BasketDetail>>(basketDetailCheckProduct);
 
             basketDetailCheckProduct = AddProductThenUpdateBasketDetail(productId, basketId).Data;
@@ -82,8 +82,7 @@ namespace SuperMarket.Business.Concrete
             return new SuccessDataResult<List<BasketDetail>>(basketDetailList);
         }
 
-
-        public IResult RemoveFromBasketDetail( int basketDetailId)
+        public IResult RemoveFromBasketDetail(int basketDetailId)
         {
             var basketDetail = GetBasket(basketDetailId).Data;
             _unitOfWork.BasketDetailDal.Remove(basketDetail);

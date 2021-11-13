@@ -5,7 +5,6 @@
      * @return {Object}
      */
     function Alertify() {
-
         // holds a references of created dialogs
         var dialogs = {};
 
@@ -26,7 +25,6 @@
             }
             return sub;
         }
-
 
         /**
         * Helper: returns a dialog instance from saved dialogs.
@@ -79,12 +77,12 @@
         return {
             /**
              * Alertify defaults
-             * 
+             *
              * @type {Object}
              */
             defaults: defaults,
             /**
-             * Dialogs factory 
+             * Dialogs factory
              *
              * @param {string}      Dialog name.
              * @param {Function}    A Dialog factory function.
@@ -92,7 +90,6 @@
              * @param {String}      The name of the base type to inherit from.
              */
             dialog: function (name, Factory, transient, base) {
-
                 // get request, create a new instance and return it.
                 if (typeof Factory !== 'function') {
                     return get_dialog(name);
@@ -106,7 +103,6 @@
                 var definition = register(name, Factory, transient, base);
 
                 if (transient) {
-
                     // make it public
                     this[name] = function () {
                         //if passed with no params, consider it a get request
@@ -166,7 +162,6 @@
              * @return {undefined}
              */
             setting: function (name, key, value) {
-
                 if (name === 'notifier') {
                     return notifier.setting(key, value);
                 }
@@ -177,13 +172,13 @@
                 }
             },
             /**
-             * [Alias] Sets dialog settings/options 
+             * [Alias] Sets dialog settings/options
              */
             set: function(name,key,value){
                 return this.setting(name, key,value);
             },
             /**
-             * [Alias] Gets dialog settings/options 
+             * [Alias] Gets dialog settings/options
              */
             get: function(name, key){
                 return this.setting(name, key);

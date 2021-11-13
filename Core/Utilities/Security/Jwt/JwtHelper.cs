@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Core.Entities.Concrete;
+﻿using Core.Entities.Concrete;
 using Core.Utilities.Security.Encyption;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Core.Utilities.Security.Jwt
 {
@@ -15,13 +14,13 @@ namespace Core.Utilities.Security.Jwt
         public IConfiguration Configuration { get; }
         private TokenOptions _tokenOptions;
         private DateTime _accessTokenExpiration;
+
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
         }
-
 
         public AccessToken CreateToken(User user)
         {
@@ -64,12 +63,10 @@ namespace Core.Utilities.Security.Jwt
 
         public ClaimsPrincipal CreateClaimsPrincipal(User user)
         {
-           ;
+            ;
             var useridentity = new ClaimsIdentity(SetClaims(user), "Login");
             var claimsPrincipal = new ClaimsPrincipal(useridentity);
             return claimsPrincipal;
-
         }
-
     }
 }

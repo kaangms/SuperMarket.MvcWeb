@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Core.Utilities.Results;
+﻿using Core.Utilities.Results;
 using SuperMarket.Business.Abstract;
 using SuperMarket.DataAccess.Abstract;
 using SuperMarket.Entities.Concrete;
 using SuperMarket.Entities.Dtos;
+using System.Collections.Generic;
+using System.Linq;
+using SuperMarket.Business.Constants;
 
 namespace SuperMarket.Business.Concrete
 {
@@ -22,21 +23,30 @@ namespace SuperMarket.Business.Concrete
         public IDataResult<Basket> GetBasket(int userId)
         {
             var basketList = _unitOfWork.BasketDal.GetList(b => b.UserId == userId);
-                 var basket=basketList.FirstOrDefault(b => b.BasketStatus == true);
-                 if (basket!=null)
-                 {
-                     return  new SuccessDataResult<Basket>(basket);
-                 }
-                 return new SuccessDataResult<Basket>();
+            var basket = basketList.FirstOrDefault(b => b.BasketStatus == true);
+            if (basket != null)
+            {
+                return new SuccessDataResult<Basket>(basket);
+            }
+            return new SuccessDataResult<Basket>();
         }
 
         public IResult AddBasket(int userId, int productId)
         {
             var basket = CheckBasket(userId).Data;
+            if (CheckProductStockAmount(productId)) return new ErrorResult(Messages.ErrorMessageForNullStock);
+           
+
+           ;
 
             var basketDetail = _basketDetailService.AddToBasketDetail(productId, basket.Id).Data;
             UpdateBasket(basket, basketDetail);
-            return new SuccessResult();
+            return new SuccessResult(Messages.SuccessAddedToBasket);
+        }
+
+        private bool CheckProductStockAmount(int productId)
+        {
+            return _unitOfWork.ProductDal.Get(p => p.Id == productId).StockAmount < 0;
         }
 
         public IDataResult<Basket> CheckBasket(int userId)
@@ -76,7 +86,7 @@ namespace SuperMarket.Business.Concrete
         public IDataResult<List<BasketDto>> GetListBasketDto(int userId)
         {
             var result = _unitOfWork.BasketDal.GetListBasketDto(userId);
-        
+
             return new SuccessDataResult<List<BasketDto>>(result);
         }
     }

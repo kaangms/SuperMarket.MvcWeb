@@ -24,7 +24,6 @@ namespace SuperMarket.MvcWebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          
             services.AddSingleton<IUserSessionService, UserSessionManager>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -38,11 +37,7 @@ namespace SuperMarket.MvcWebUI
             });
             services.AddSession();
             services.AddDistributedMemoryCache();
-         
-
-
         }
-      
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -70,9 +65,7 @@ namespace SuperMarket.MvcWebUI
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Auth}/{action=login}/{id?}");
-               
             });
         }
-       
     }
 }

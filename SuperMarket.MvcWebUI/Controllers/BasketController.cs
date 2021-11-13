@@ -1,11 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using SuperMarket.Business.Abstract;
-using SuperMarket.DataAccess.Abstract;
 using SuperMarket.MvcWebUI.Models;
 using SuperMarket.MvcWebUI.Services.SessionService.Abstract;
 
@@ -13,32 +7,29 @@ namespace SuperMarket.MvcWebUI.Controllers
 {
     public class BasketController : Controller
     {
-       private IBasketService _basketService;
+        private IBasketService _basketService;
         private IUserSessionService _userSessionService;
         private IBasketDetailService _basketDetailService;
-
-
 
         public BasketController(IBasketService basketService, IUserSessionService userSessionService, IBasketDetailService basketDetailService)
         {
             _basketService = basketService;
-        
+
             _userSessionService = userSessionService;
             _basketDetailService = basketDetailService;
         }
 
-
         public IActionResult AddToBasket(int productId)
         {
-         
-            ViewBag.ResultAddBasketStatus = "";
             var user = _userSessionService.GetUser().User;
-           var result= _basketService.AddBasket(user.Id, productId);
-            ViewBag.ResultAddBasketStatus = result.Success;
-   
+            //var result = _basketService.AddBasket(user.Id, productId);
+            var result = _basketService.AddBasket(1, productId);
+
+            TempData["MyActionResultModalMessage"] = result.Message;
 
             return RedirectToAction("Index", "Product");
         }
+
         public IActionResult RemoveToBasketDetail(int basketDetailId)
         {
             var user = _userSessionService.GetUser().User;
@@ -54,15 +45,12 @@ namespace SuperMarket.MvcWebUI.Controllers
             var user = _userSessionService.GetUser().User;
             var basketDtos = _basketService.GetListBasketDto(user.Id).Data;
 
-            var model=new BasketViewModel()
+            var model = new BasketViewModel()
             {
                 BasketDtos = basketDtos
             };
 
-
             return View(model);
         }
-
-       
     }
 }

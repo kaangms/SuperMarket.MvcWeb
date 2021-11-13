@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Core.Utilities.Results;
-using Newtonsoft.Json;
+﻿using Core.Utilities.Results;
 using SuperMarket.Business.Abstract;
 using SuperMarket.Business.Constants;
 using SuperMarket.DataAccess.Abstract;
 using SuperMarket.Entities.Concrete;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SuperMarket.Business.Concrete
 {
@@ -30,7 +27,6 @@ namespace SuperMarket.Business.Concrete
             return new SuccessDataResult<List<Product>>(_unitOfWork.ProductDal.GetList().ToList());
         }
 
-      
         public IResult Add(Product product)
         {
             _unitOfWork.ProductDal.Add(product);
@@ -43,6 +39,13 @@ namespace SuperMarket.Business.Concrete
             _unitOfWork.ProductDal.Remove(product);
             _unitOfWork.SaveChanges();
             return new SuccessResult();
+        }
+
+        public IResult RemoveByProductId(int productId)
+        {
+          var product=  GetById(productId).Data;
+          Remove(product);
+          return new SuccessResult();
         }
 
         public IResult Update(Product product)

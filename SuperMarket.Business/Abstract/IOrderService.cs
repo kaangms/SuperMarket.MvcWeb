@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Utilities.Results;
+﻿using Core.Utilities.Results;
 using SuperMarket.Entities.Concrete;
 
 namespace SuperMarket.Business.Abstract
@@ -9,6 +6,7 @@ namespace SuperMarket.Business.Abstract
     public interface IOrderService
     {
         IDataResult<Order> AddOrder(Order order);
+
         IResult CreateOrderByBasket(int userId, short paymentType);
     }
 }

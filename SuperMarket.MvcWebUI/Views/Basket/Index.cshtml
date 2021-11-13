@@ -46,7 +46,6 @@
         <div class="col-4">
             <p class="badge-light">Sepet Adedi :</p>
             <p class="badge-light">Sepet Tutarı:</p>
-
         </div>
         <div class="col-4">
             @{ var basket = Model.BasketDtos;}
@@ -60,12 +59,11 @@
                 <p>0</p>
                 <p>0</p>
             }
-
         </div>
     </div>
     @if (basket.Count != 0)
     {
-        @if (basket.FirstOrDefault().Basket.TotalPrice!=0)
+        @if (basket.FirstOrDefault().Basket.TotalPrice != 0)
         {
             <div class="row justify-content-end">
                 <div class="col-4">
@@ -86,14 +84,10 @@
                             Havale
                         </a>
                     </p>
-
-
                 </div>
             </div>
- 
+
         }
-        
+
     }
-
-
 </div>

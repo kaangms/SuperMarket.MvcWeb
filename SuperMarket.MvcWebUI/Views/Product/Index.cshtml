@@ -1,13 +1,10 @@
 ﻿@model ProductListViewModel
 
 @{
-    ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-
 <a class="navbar-brand" asp-area="" asp-controller="Product" asp-action="AddProduct" asp-route-productId="0"><span class="badge badge-primary">Ürün Ekle</span> </a>
-<p>@ViewBag.ResultAddBasketStatus </p>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -31,47 +28,19 @@
                 <td>@product.UnitPrice</td>
                 <td>@product.StockAmount</td>
                 <td>
-                    <a type="button"
-                       asp-controller="Basket"
-                       asp-action="AddToBasket"
-                       asp-route-productId="@product.Id"
-                       id="addBasket"
-                       class="btn btn-xs btn-success text-white">
-                        Sepete Ekle
-                    </a>
-                    <a type="button"
-                       data-toggle="modal"
-                       data-target="#deleteModel"
-                       class="btn btn-danger text-white">
-                        Sil
-                    </a>
-                    <a type="button"
-                       asp-controller="Product"
-                       asp-action="UpdateProduct"
-                       asp-route-productId="@product.Id" class="btn btn-warning text-white">Düzenle</a>
-
+                    <a type="button" href="/Basket/AddToBasket?productId=@product.Id" class="btn btn-xs btn-success text-white"> Sepete Ekle</a>
+                    <a type="button" onclick="removeProduct(@product.Id)"  class="btn btn-danger text-white" >Sil</a>
+                    <a type="button" href="/Product/UpdateProduct?productId=@product.Id" class="btn btn-warning text-white">Düzenle</a>
                 </td>
-
             </tr>
-
-            <div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="deleteModel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            Silmek istediğinize emin misiniz?
-                        </div>
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-success text-white" data-dismiss="modal">Hayır</a>
-                            <a type="button"
-                               asp-controller="Product"
-                               asp-action="RemoveProduct"
-                               asp-route-productId="@product.Id"
-                               class="btn btn-danger text-white">Evet</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         }
     </tbody>
 </table>
+@*''*@
 
+@section Scripts
+{
+    <script type="text/javascript">
+        const myActionResultTempDataMessage="@TempData["MyActionResultModalMessage"]";
+    </script>
+}

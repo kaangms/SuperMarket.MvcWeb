@@ -1,19 +1,11 @@
-﻿ using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Utilities.Results;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SuperMarket.Business.Abstract;
 using SuperMarket.Entities.Concrete;
 using SuperMarket.MvcWebUI.Models;
 
 namespace SuperMarket.MvcWebUI.Controllers
 {
-
     public class ProductController : Controller
     {
         private IProductService _productService;
@@ -22,10 +14,10 @@ namespace SuperMarket.MvcWebUI.Controllers
         {
             _productService = productService;
         }
+
         [Authorize]
         public IActionResult Index()
         {
-            ViewBag.ResultAddBasketStatus = "deneme";
             var model = new ProductListViewModel
             {
                 Products = _productService.GetList()
@@ -33,6 +25,7 @@ namespace SuperMarket.MvcWebUI.Controllers
 
             return View(model);
         }
+
         [Authorize]
         public IActionResult GetList()
         {
@@ -48,15 +41,14 @@ namespace SuperMarket.MvcWebUI.Controllers
             return BadRequest(model.Message);
         }
 
-
         public IActionResult AddProduct(int productId)
         {
-            
             ViewBag.ResultStatus = "";
             //ViewBag.ResultMessages = "";
 
             return View(new ProductViewModel());
         }
+
         [HttpPost]
         public IActionResult AddProduct(Product product)
         {
@@ -65,7 +57,6 @@ namespace SuperMarket.MvcWebUI.Controllers
             ViewBag.ResultStatus = result.Success;
             //ViewBag.ResultMessages = result.Message;
             return RedirectToAction("AddProduct", "Product");
-
         }
 
         [HttpPost("add")]
@@ -80,7 +71,7 @@ namespace SuperMarket.MvcWebUI.Controllers
 
             return BadRequest(result.Message);
         }
-   
+
         public IActionResult UpdateProduct(int productId)
         {
             var model = new ProductViewModel
@@ -91,20 +82,18 @@ namespace SuperMarket.MvcWebUI.Controllers
             return View(model);
             //return RedirectToAction("UpdateProduct", "Product");
         }
+
         [HttpPost]
         public IActionResult UpdateProduct(Product product)
         {
-           _productService.Update(product);
+            _productService.Update(product);
 
-          
             return RedirectToAction("Index", "Product");
-
         }
 
         public IActionResult RemoveProduct(int productId)
         {
-            var product = _productService.GetById(productId).Data;
-            _productService.Remove(product);
+            _productService.RemoveByProductId(productId);
             return RedirectToAction("Index", "Product");
         }
     }

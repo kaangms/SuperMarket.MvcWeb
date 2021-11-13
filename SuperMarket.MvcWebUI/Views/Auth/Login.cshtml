@@ -21,17 +21,13 @@
             <p>@ViewBag.token </p>*@
         <h1 id="login-header">Giriş</h1>
         <form id="login-form" asp-controller="Auth" asp-action="Login">
-            <label style="  
+            <label style="
                                       background-color: antiquewhite;
-                                      font-weight: bold;"
-                   >Not:Kolay giriş olması için value değerleri yazılmıştır.</label>
+                                      font-weight: bold;">Not:Kolay giriş olması için value değerleri yazılmıştır.</label>
             <input type="text" asp-for="User.UserName" value="dream.b1" class="login-form-field" placeholder="Kullanıcı Adı">
             <input type="password" asp-for="User.Password" value="1" class="login-form-field" placeholder="Parola">
             <button type="submit" id="login-form-submit">Giriş</button>
         </form>
-
     </main>
-
-
 </body>
 </html>

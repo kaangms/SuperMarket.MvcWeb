@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Core.Entities.Abstract;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
-using Core.Entities;
-using Core.Entities.Abstract;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Core.DataAccess
 {
@@ -12,11 +10,13 @@ namespace Core.DataAccess
     where T : class, IEntity, new()
     {
         T Get(Expression<Func<T, bool>> filter);
+
         IList<T> GetList(Expression<Func<T, bool>> filter = null);
+
         EntityEntry<T> Add(T entity);
+
         void Remove(T entity);
+
         void Update(T entity);
-
-
     }
 }

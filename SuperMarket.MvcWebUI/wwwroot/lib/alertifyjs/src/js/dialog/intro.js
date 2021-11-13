@@ -59,22 +59,21 @@
 
         /**
          * Helper: initializes the dialog instance
-         * 
+         *
          * @return	{Number}	The total count of currently open modals.
          */
         function initialize(instance){
-            
             if(!instance.__internal){
                 //invoke preinit global hook
                 alertify.defaults.hooks.preinit(instance);
                 //no need to expose init after this.
                 delete instance.__init;
-              
+
                 //keep a copy of initial dialog settings
                 if(!instance.__settings){
                     instance.__settings = copy(instance.settings);
                 }
-                
+
                 //get dialog buttons/focus setup
                 var setup;
                 if(typeof instance.setup === 'function'){
@@ -92,7 +91,7 @@
                         }
                     };
                 }
-                
+
                 //initialize hooks object.
                 if(typeof instance.hooks !== 'object'){
                     instance.hooks = {};
@@ -116,7 +115,7 @@
                 var internal = instance.__internal = {
                     /**
                      * Flag holding the open state of the dialog
-                     * 
+                     *
                      * @type {Boolean}
                      */
                     isOpen:false,
@@ -186,7 +185,7 @@
                 elements.root.className = classes.base + ' ' + classes.hidden + ' ';
 
                 elements.root.innerHTML = templates.dimmer + templates.modal;
-                
+
                 //dimmer
                 elements.dimmer = elements.root.firstChild;
 
@@ -200,14 +199,14 @@
                 elements.reset = [];
                 elements.reset.push(elements.dialog.firstChild);
                 elements.reset.push(elements.dialog.lastChild);
-                
+
                 //commands
                 elements.commands = {};
                 elements.commands.container = elements.reset[0].nextSibling;
                 elements.commands.pin = elements.commands.container.firstChild;
                 elements.commands.maximize = elements.commands.pin.nextSibling;
                 elements.commands.close = elements.commands.maximize.nextSibling;
-                
+
                 //header
                 elements.header = elements.commands.container.nextSibling;
 
@@ -219,7 +218,7 @@
                 //footer
                 elements.footer = elements.body.nextSibling;
                 elements.footer.innerHTML = templates.buttons.auxiliary + templates.buttons.primary;
-                
+
                 //resize handle
                 elements.resizeHandle = elements.footer.nextSibling;
 
@@ -231,10 +230,10 @@
                 elements.buttonTemplate = elements.buttons.primary.firstChild;
                 //remove button template
                 elements.buttons.primary.removeChild(elements.buttonTemplate);
-                               
+
                 for(var x=0; x < instance.__internal.buttons.length; x+=1) {
                     var button = instance.__internal.buttons[x];
-                    
+
                     // add to the list of used keys.
                     if(usedKeys.indexOf(button.key) < 0){
                         usedKeys.push(button.key);
@@ -258,7 +257,7 @@
                 }
                 //make elements pubic
                 instance.elements = elements;
-                
+
                 //save event handlers delegates
                 internal.resetHandler = delegate(instance, onReset);
                 internal.beginMoveHandler = delegate(instance, beginMove);
@@ -352,10 +351,10 @@
                 }
             }
         }
-		
+
         /**
          * Sets the name of the transition used to show/hide the dialog
-         * 
+         *
          * @param {Object} instance The dilog instance.
          *
          */
@@ -368,7 +367,7 @@
         }
 
         /**
-         * Toggles the dialog no transition 
+         * Toggles the dialog no transition
          *
          * @param {Object} instance The dilog instance.
          *
@@ -393,7 +392,6 @@
          */
         function updateDisplayMode(instance){
             if(instance.get('modal')){
-
                 //make modal
                 removeClass(instance.elements.root, classes.modeless);
 
@@ -423,7 +421,7 @@
         }
 
         /**
-         * Toggles the dialog basic view mode 
+         * Toggles the dialog basic view mode
          *
          * @param {Object} instance The dilog instance.
          *
@@ -440,7 +438,7 @@
         }
 
         /**
-         * Toggles the dialog frameless view mode 
+         * Toggles the dialog frameless view mode
          *
          * @param {Object} instance The dilog instance.
          *
@@ -455,7 +453,7 @@
                 removeClass(instance.elements.root, classes.frameless);
             }
         }
-		
+
         /**
          * Helper: Brings the modeless dialog to front, attached to modeless dialogs.
          *
@@ -465,7 +463,6 @@
          * @return {undefined}
          */
         function bringToFront(event, instance){
-            
             // Do not bring to front if preceeded by an open modal
             var index = openDialogs.indexOf(instance);
             for(var x=index+1;x<openDialogs.length;x+=1){
@@ -473,7 +470,7 @@
                     return;
                 }
             }
-			
+
             // Bring to front by making it the last child.
             if(document.body.lastChild !== instance.elements.root){
                 document.body.appendChild(instance.elements.root);
@@ -482,17 +479,17 @@
                 openDialogs.push(instance);
                 setFocus(instance);
             }
-			
+
             return false;
         }
-		
+
         /**
          * Helper: reflects dialogs options updates
          *
          * @param {Object} instance The dilog instance.
          * @param {String} option The updated option name.
          *
-         * @return	{undefined}	
+         * @return	{undefined}
          */
         function optionUpdated(instance, option, oldValue, newValue){
             switch(option){
@@ -553,7 +550,7 @@
                 instance.hooks.onupdate.call(instance, option, oldValue, newValue);
             }
         }
-		
+
         /**
          * Helper: reflects dialogs options updates
          *
@@ -564,9 +561,9 @@
          * @param {Object} value Optional, the value associated with the key (in case it was a string).
          * @param {String} option The updated option name.
          *
-         * @return	{Object} result object 
+         * @return	{Object} result object
          *	The result objects has an 'op' property, indicating of this is a SET or GET operation.
-         *		GET: 
+         *		GET:
          *		- found: a flag indicating if the key was found or not.
          *		- value: the property value.
          *		SET:
@@ -618,7 +615,6 @@
                             callback.call(instance,key, old, value);
                         }
                         result.items.push({'key': key, 'value': value , 'found':true});
-
                     }else{
                         result.items.push({'key': key, 'value': value , 'found':false});
                     }

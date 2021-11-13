@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - SuperMarket.MvcWebUI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
- 
 </head>
 <body>
     <header>
@@ -18,14 +17,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    @*<ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                        </ul>*@
                 </div>
                 <div class="row justify-content-end">
                     <div class="col-4">
@@ -36,12 +27,10 @@
                             Çıkış
                         </a>
                     </div>
-
                 </div>
             </div>
         </nav>
     </header>
-
 
     <div class="container-fluid" style="margin-top: 80px">
 
@@ -52,29 +41,36 @@
                 <a class="navbar-brand" asp-area="" asp-controller="Basket" asp-action="Index" style="text-align: left">Sepet</a>
             </div>
             <div class="col-9">
-                @*@if (TempData["message"] != null)
-                    {
 
-                        <div class="alert alert-info" role="alert">@TempData["message"]</div>
-                    }*@
                 <main role="main" class="pb-4">
                     @RenderBody()
                 </main>
             </div>
         </div>
     </div>
-
-
+    <div class="modal fade" id="MyActionModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div id="ActionModalBody" class="modal-body ">
+                    s
+                </div>
+                <div class="modal-footer">
+                    <a id="MyActionButton" type="button" class="btn btn-success text-white">Düzelt </a>
+                    <a id="MyModalDismissButton" type="button" class="btn btn-warning text-white" data-dismiss="modal"> Kaydet</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - SuperMarket.MvcWebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - SuperMarket.MvcWebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
-
 </body>
 </html>

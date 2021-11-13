@@ -1,9 +1,8 @@
-﻿using Core.Entities;
-using Core.Entities.Abstract;
+﻿using Core.Entities.Abstract;
 
 namespace SuperMarket.Entities.Concrete
 {
-    public class Product :  IEntity
+    public class Product : IEntity
     {
         public int Id { get; set; }
         public string ProductName { get; set; }

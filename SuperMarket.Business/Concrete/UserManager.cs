@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Entities.Concrete;
+﻿using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using SuperMarket.Business.Abstract;
 using SuperMarket.Business.Constants;
@@ -26,13 +23,11 @@ namespace SuperMarket.Business.Concrete
                 return new ErrorDataResult<User>(Messages.UserNotFound);
             }
 
-            if (user.Password!=password)
+            if (user.Password != password)
             {
                 return new ErrorDataResult<User>(Messages.UserPasswordError);
             }
             return new SuccessDataResult<User>(user);
         }
-
-
     }
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace SuperMarket.MvcWebUI.Models
 {
     public class ErrorViewModel

@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SuperMarket.MvcWebUI.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-
 
 namespace SuperMarket.MvcWebUI.Controllers
 {
@@ -21,7 +16,6 @@ namespace SuperMarket.MvcWebUI.Controllers
 
         public IActionResult Index()
         {
-            
             return View();
         }
 

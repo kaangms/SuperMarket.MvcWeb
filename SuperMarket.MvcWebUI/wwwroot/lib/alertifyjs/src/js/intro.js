@@ -15,7 +15,7 @@
         TAB: 9
     };
     /**
-     * Default options 
+     * Default options
      * @type {Object}
      */
     var defaults = {
@@ -81,7 +81,7 @@
             postinit:function(){}
         }
     };
-    
+
     //holds open dialogs instances
     var openDialogs = [];
 
@@ -90,19 +90,19 @@
      *
      * @element {node}      The element
      * @className {string}  One or more space-separated classes to be added to the class attribute of the element.
-     * 
+     *
      * @return {undefined}
      */
     function addClass(element,classNames){
         element.className += ' ' + classNames;
     }
-    
+
     /**
      * [Helper]  Removes the specified class(es) from the element.
      *
      * @element {node}      The element
      * @className {string}  One or more space-separated classes to be removed from the class attribute of the element.
-     * 
+     *
      * @return {undefined}
      */
     function removeClass(element, classNames) {
@@ -172,11 +172,11 @@
             }
             return cpy;
         }
-      
+
         if(src instanceof Date){
             return new Date(src.getTime());
         }
-      
+
         if(src instanceof RegExp){
             cpy = new RegExp(src.source);
             cpy.global = src.global;
@@ -185,7 +185,7 @@
             cpy.lastIndex = src.lastIndex;
             return cpy;
         }
-        
+
         if(typeof src === 'object'){
             cpy = {};
             // copy dialog pototype over definition.
