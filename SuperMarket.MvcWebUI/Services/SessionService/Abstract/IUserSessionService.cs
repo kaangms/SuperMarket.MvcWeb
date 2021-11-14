@@ -1,11 +1,12 @@
-﻿using SuperMarket.MvcWebUI.Models;
+﻿using Core.Entities.Concrete;
+using SuperMarket.MvcWebUI.Models;
 
 namespace SuperMarket.MvcWebUI.Services.SessionService.Abstract
 {
     public interface IUserSessionService
     {
-        public UserViewModel GetUser();
+        public User GetUser();
 
-        public void SetUser(UserViewModel userViewModel);
+        public void SetUser(User user);
     }
 }

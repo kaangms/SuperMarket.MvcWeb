@@ -39,4 +39,3 @@ C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Business\obj\Debug\ne
 C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Business\obj\Debug\netstandard2.0\SuperMarket.Business.csproj.CoreCompileInputs.cache
 C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Business\obj\Debug\netstandard2.0\SuperMarket.Business.dll
 C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Business\obj\Debug\netstandard2.0\SuperMarket.Business.pdb
-C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Business\obj\Debug\netstandard2.0\SuperMarket.Business.csproj.CopyComplete

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SuperMarket.Business.Abstract;
 using SuperMarket.MvcWebUI.Models;
 using SuperMarket.MvcWebUI.Services.SessionService.Abstract;
@@ -7,43 +9,37 @@ namespace SuperMarket.MvcWebUI.Controllers
 {
     public class BasketController : Controller
     {
-        private IBasketService _basketService;
-        private IUserSessionService _userSessionService;
-        private IBasketDetailService _basketDetailService;
+        private readonly IBasketService _basketService;
+        private readonly IBasketDetailService _basketDetailService;
+        private readonly User _user;
+
 
         public BasketController(IBasketService basketService, IUserSessionService userSessionService, IBasketDetailService basketDetailService)
         {
             _basketService = basketService;
-
-            _userSessionService = userSessionService;
+            _user = userSessionService.GetUser();
             _basketDetailService = basketDetailService;
         }
-
+        [Authorize]
         public IActionResult AddToBasket(int productId)
         {
-            var user = _userSessionService.GetUser().User;
-            //var result = _basketService.AddBasket(user.Id, productId);
-            var result = _basketService.AddBasket(1, productId);
-
+         
+            var result = _basketService.AddAndReturnBasketResult(_user.Id, productId);
             TempData["MyActionResultModalMessage"] = result.Message;
-
             return RedirectToAction("Index", "Product");
         }
-
+        [Authorize]
         public IActionResult RemoveToBasketDetail(int basketDetailId)
         {
-            var user = _userSessionService.GetUser().User;
-            _basketDetailService.RemoveFromBasketDetail(basketDetailId);
-            var basket = _basketService.GetBasket(user.Id).Data;
-            var basketDetails = _basketDetailService.GetBasketDetailList(basket.Id).Data;
-            _basketService.UpdateBasket(basket, basketDetails);
+            var result = _basketService.RemoveProductFromBasket(basketDetailId);
+            TempData["message"] = result.Message;
             return RedirectToAction("Index", "Basket");
         }
-
+        [Authorize]
         public IActionResult Index()
         {
-            var user = _userSessionService.GetUser().User;
-            var basketDtos = _basketService.GetListBasketDto(user.Id).Data;
+         
+            var basketDtos = _basketService.GetListBasketDto(_user.Id).Data;
 
             var model = new BasketViewModel()
             {

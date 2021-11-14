@@ -14,10 +14,6 @@ namespace SuperMarket.Business.Abstract
 
         IDataResult<List<BasketDetail>> AddToBasketDetail(int productId, int basketId);
 
-        IDataResult<List<BasketDetail>> AddProductThenUpdateBasketDetail(int productId, int basketId);
-
-        IDataResult<List<BasketDetail>> CheckBasketDetailToProduct(int productId, int basketId);
-
         IResult RemoveFromBasketDetail(int basketDetailId);
     }
 }

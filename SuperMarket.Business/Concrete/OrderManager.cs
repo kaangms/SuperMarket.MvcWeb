@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using SuperMarket.Business.Abstract;
+using SuperMarket.Business.Constants;
 using SuperMarket.DataAccess.Abstract;
 using SuperMarket.Entities.Concrete;
 
@@ -26,8 +27,18 @@ namespace SuperMarket.Business.Concrete
 
         public IResult CreateOrderByBasket(int userId, short paymentType)
         {
-            var basket = _basketService.GetBasket(userId).Data;
-            var order = new Order
+            var basket = CreateOrderByBasketId(userId, paymentType, out var order);
+            _orderDetailService.CreateOrderDetailByOrder(order);
+            basket.BasketStatus = false;
+            _basketService.UpdateBasket(basket);
+            _unitOfWork.SaveChanges();
+            return new SuccessResult(Messages.SuccessOrderCreated);
+        }
+
+        private Basket CreateOrderByBasketId(int userId, short paymentType, out Order order)
+        {
+            var basket = _basketService.GetWaitingBasket(userId).Data;
+            order = new Order
             {
                 BasketId = basket.Id,
                 UserId = basket.UserId,
@@ -35,12 +46,7 @@ namespace SuperMarket.Business.Concrete
             };
             order = AddOrder(order).Data;
             _unitOfWork.SaveChanges();
-            _orderDetailService.CreateOrderDetailByOrder(order);
-
-            basket.BasketStatus = false;
-            _basketService.UpdateBasket(basket);
-            _unitOfWork.SaveChanges();
-            return new SuccessResult();
+            return basket;
         }
     }
 }

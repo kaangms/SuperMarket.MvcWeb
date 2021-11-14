@@ -2,8 +2,8 @@
 @using SuperMarket.Entities.Concrete
 @model ProductViewModel
 
+
 <form asp-controller="Product" asp-action="AddProduct">
-    @*<h1>  @ViewBag.ResultMessages</h1>*@
     <label>Ürün Ad:</label><br>
     <input asp-for="Product.ProductName" type="text"><br>
 
@@ -19,8 +19,6 @@
     <label>Stok Adedi :</label><br>
     <input asp-for="Product.StockAmount" type="number"><br><br>
 
-    <button id="addProduct" onclick="added()" class="btn btn-primary" type="submit">
-        Kaydet
-    </button>
+    <button  class="btn btn-primary" type="submit">Kaydet</button>
 </form>
 @*for="lname"*@

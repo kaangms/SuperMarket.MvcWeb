@@ -1,4 +1,5 @@
-﻿using Core.Entities.Abstract;
+﻿using System;
+using Core.Entities.Abstract;
 
 namespace SuperMarket.Entities.Concrete
 {
@@ -10,5 +11,7 @@ namespace SuperMarket.Entities.Concrete
         public int Amount { get; set; }
         public decimal Price { get; set; }
         public decimal TotalPrice { get; set; }
+
+      
     }
 }

@@ -7,18 +7,13 @@ namespace SuperMarket.Business.Abstract
 {
     public interface IBasketService
     {
-        IDataResult<Basket> GetBasket(int userId);
-
-        IResult AddBasket(int userId, int productId);
-
-        IDataResult<Basket> CheckBasket(int userId);
-
-        IDataResult<Basket> AddBasketToUser(int userId);
-
+        IDataResult<Basket> GetWaitingBasket(int userId);
+        IDataResult<List<BasketDto>> AddAndReturnBasketResult(int userId, int productId);
         IResult UpdateBasket(Basket basket, List<BasketDetail> basketDetail);
 
         IResult UpdateBasket(Basket basket);
 
         IDataResult<List<BasketDto>> GetListBasketDto(int userId);
+        IResult RemoveProductFromBasket(int basketDetailId);
     }
 }

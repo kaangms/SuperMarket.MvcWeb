@@ -12,9 +12,9 @@ namespace SuperMarket.MvcWebUI.Controllers
 {
     public class AuthController : Controller
     {
-        private IUserSessionService _userSessionService;
-        private IAuthService _authService;
-        private ITokenHelper _tokenHelper;
+        private readonly IUserSessionService _userSessionService;
+        private readonly IAuthService _authService;
+        private readonly ITokenHelper _tokenHelper;
 
         public AuthController(IAuthService authService, ITokenHelper tokenHelper, IUserSessionService userSessionService)
         {
@@ -26,7 +26,6 @@ namespace SuperMarket.MvcWebUI.Controllers
         public IActionResult Login()
         {
             return View(new UserViewModel());
-            //return View();
         }
 
         [HttpPost]
@@ -38,13 +37,8 @@ namespace SuperMarket.MvcWebUI.Controllers
             {
                 return View();
             }
-            var userViewModel = new UserViewModel()
-            {
-                User = result.Data
-            };
-            _userSessionService.SetUser(userViewModel);
-
-            await HttpContext.SignInAsync(_tokenHelper.CreateClaimsPrincipal(user));
+            _userSessionService.SetUser(result.Data);
+            await HttpContext.SignInAsync(_tokenHelper.CreateClaimsPrincipal(result.Data));
             return RedirectToAction("Index", "Product");
         }
 

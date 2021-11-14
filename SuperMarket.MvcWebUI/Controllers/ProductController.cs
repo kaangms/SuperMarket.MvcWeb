@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Core.Utilities.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarket.Business.Abstract;
 using SuperMarket.Entities.Concrete;
@@ -8,7 +9,7 @@ namespace SuperMarket.MvcWebUI.Controllers
 {
     public class ProductController : Controller
     {
-        private IProductService _productService;
+        private readonly IProductService _productService;
 
         public ProductController(IProductService productService)
         {
@@ -26,52 +27,25 @@ namespace SuperMarket.MvcWebUI.Controllers
             return View(model);
         }
 
+
         [Authorize]
-        public IActionResult GetList()
+        public IActionResult AddProduct()
         {
-            var model = new ProductListViewModel
-            {
-                Products = _productService.GetList()
-            }.Products;
-            if (model.Success)
-            {
-                return Ok(model.Data);
-            }
-
-            return BadRequest(model.Message);
-        }
-
-        public IActionResult AddProduct(int productId)
-        {
-            ViewBag.ResultStatus = "";
-            //ViewBag.ResultMessages = "";
-
             return View(new ProductViewModel());
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AddProduct(Product product)
         {
             var result = _productService.Add(product);
-
-            ViewBag.ResultStatus = result.Success;
-            //ViewBag.ResultMessages = result.Message;
+            var addProduct = ErrorAddOrUpdateProduct(product, result);
+            if (addProduct != null) return addProduct;
+            TempData["message"] = result.Message;
             return RedirectToAction("AddProduct", "Product");
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Product product)
-        {
-            var result = _productService.Add(product);
-
-            if (result.Success)
-            {
-                return Ok(result.Message);
-            }
-
-            return BadRequest(result.Message);
-        }
-
+        [Authorize]
         public IActionResult UpdateProduct(int productId)
         {
             var model = new ProductViewModel
@@ -83,17 +57,34 @@ namespace SuperMarket.MvcWebUI.Controllers
             //return RedirectToAction("UpdateProduct", "Product");
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateProduct(Product product)
         {
-            _productService.Update(product);
+            var result = _productService.Update(product);
+            var updateProduct = ErrorAddOrUpdateProduct(product, result);
+            if (updateProduct != null) return updateProduct;
 
             return RedirectToAction("Index", "Product");
         }
 
+        private IActionResult ErrorAddOrUpdateProduct(Product product, IResult result)
+        {
+            if (!result.Success)
+            {
+                var model = new ProductViewModel {Product = product};
+                TempData["message"] = result.Message;
+                return View(model);
+            }
+
+            return null;
+        }
+
+        [Authorize]
         public IActionResult RemoveProduct(int productId)
         {
-            _productService.RemoveByProductId(productId);
+            var result = _productService.RemoveByProductId(productId);
+            TempData["message"] = result.Message;
             return RedirectToAction("Index", "Product");
         }
     }

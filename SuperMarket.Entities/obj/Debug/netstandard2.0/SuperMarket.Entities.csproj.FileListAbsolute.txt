@@ -29,6 +29,6 @@ C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Entities\obj\Debug\ne
 C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Entities\obj\Debug\netstandard2.0\SuperMarket.Entities.AssemblyInfoInputs.cache
 C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Entities\obj\Debug\netstandard2.0\SuperMarket.Entities.AssemblyInfo.cs
 C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Entities\obj\Debug\netstandard2.0\SuperMarket.Entities.csproj.CoreCompileInputs.cache
-C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Entities\obj\Debug\netstandard2.0\SuperMarket.Entities.csproj.CopyComplete
 C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Entities\obj\Debug\netstandard2.0\SuperMarket.Entities.dll
 C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Entities\obj\Debug\netstandard2.0\SuperMarket.Entities.pdb
+C:\Users\hkgms\source\repos\SuperMarket.MvcWeb\SuperMarket.Entities\obj\Debug\netstandard2.0\SuperMarket.Entities.csproj.CopyComplete

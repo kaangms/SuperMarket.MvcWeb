@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using SuperMarket.MvcWebUI.Extensions;
 using SuperMarket.MvcWebUI.Models;
 using SuperMarket.MvcWebUI.Services.SessionService.Abstract;
@@ -7,29 +8,29 @@ namespace SuperMarket.MvcWebUI.Services.SessionService.Concrete
 {
     public class UserSessionManager : IUserSessionService
     {
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserSessionManager(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public UserViewModel GetUser()
+        public User GetUser()
         {
-            UserViewModel userVewModelCheck = _httpContextAccessor.HttpContext.Session.GetObject<UserViewModel>("userVewModel");
+            User userToCheck = _httpContextAccessor.HttpContext.Session.GetObject<User>("user");
 
-            if (userVewModelCheck == null)
+            if (userToCheck == null)
             {
-                _httpContextAccessor.HttpContext.Session.SetObject("userVewModel", new UserViewModel());
-                userVewModelCheck = _httpContextAccessor.HttpContext.Session.GetObject<UserViewModel>("userVewModel");
+                _httpContextAccessor.HttpContext.Session.SetObject("user", new User());
+                userToCheck = _httpContextAccessor.HttpContext.Session.GetObject<User>("user");
             }
 
-            return userVewModelCheck;
+            return userToCheck;
         }
 
-        public void SetUser(UserViewModel userVewModel)
+        public void SetUser(User user)
         {
-            _httpContextAccessor.HttpContext.Session.SetObject("userVewModel", userVewModel);
+            _httpContextAccessor.HttpContext.Session.SetObject("user", user);
         }
     }
 }

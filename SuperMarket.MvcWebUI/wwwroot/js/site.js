@@ -18,6 +18,7 @@ $(document).ready(function () {
 });
 
 function removeProduct(productId) {
+    myActionButtonElement.style.display = "block";
     myActionButtonElement.innerHTML = "Evet";
     myActionButtonElement.href = '/Product/RemoveProduct?productId=' + productId;
     myModalDismissButtonElement.innerHTML = "Hayır";
@@ -29,6 +30,7 @@ function removeProduct(productId) {
 function openActionResultModal(message) {
     myActionModalBodyElement.innerHTML = message;
     myModalDismissButtonElement.innerHTML = "Kapat";
-    myActionButtonElement.remove();
+    myActionButtonElement.style.display = "none";
+    console.log(myActionButtonElement);
     $('#MyActionModal').modal('show');
 }

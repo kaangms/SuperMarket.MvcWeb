@@ -22,7 +22,6 @@ namespace SuperMarket.Business.Concrete
         public IDataResult<List<BasketDetail>> GetBasketDetailList(int basketId)
         {
             var result = _unitOfWork.BasketDetailDal.GetList(bd => bd.BasketId == basketId);
-
             return new SuccessDataResult<List<BasketDetail>>(result.ToList());
         }
 
@@ -42,15 +41,29 @@ namespace SuperMarket.Business.Concrete
 
         public IDataResult<List<BasketDetail>> AddToBasketDetail(int productId, int basketId)
         {
-            var basketDetailCheckProduct = CheckBasketDetailToProduct(productId, basketId).Data;
-            if (basketDetailCheckProduct.FirstOrDefault(bd => bd.ProductId == productId) != null)
-                return new SuccessDataResult<List<BasketDetail>>(basketDetailCheckProduct);
-
-            basketDetailCheckProduct = AddProductThenUpdateBasketDetail(productId, basketId).Data;
-            return new SuccessDataResult<List<BasketDetail>>(basketDetailCheckProduct);
+            CheckBasketDetailToProduct(productId, basketId);
+            var basketDetailList = GetBasketDetailList(basketId).Data;
+            return new SuccessDataResult<List<BasketDetail>>(basketDetailList);
         }
 
-        public IDataResult<List<BasketDetail>> AddProductThenUpdateBasketDetail(int productId, int basketId)
+        private IResult CheckBasketDetailToProduct(int productId, int basketId)
+        {
+            var basketDetailCheckProduct = GetBasket(productId, basketId).Data;
+            if (basketDetailCheckProduct != null) UpdateBasketDetail(basketDetailCheckProduct);
+            else AddProductThenUpdateBasketDetail(productId, basketId);
+            _unitOfWork.SaveChanges();
+            return new SuccessResult();
+        }
+
+        private void UpdateBasketDetail(BasketDetail basketDetailCheckProduct)
+        {
+            basketDetailCheckProduct.Amount++;
+            basketDetailCheckProduct.TotalPrice = basketDetailCheckProduct.Amount * basketDetailCheckProduct.Price;
+            _unitOfWork.BasketDetailDal.Update(basketDetailCheckProduct);
+          
+        }
+
+        private IDataResult<List<BasketDetail>> AddProductThenUpdateBasketDetail(int productId, int basketId)
         {
             var product = _productService.GetById(productId).Data;
             var basketDetail = new BasketDetail
@@ -63,21 +76,6 @@ namespace SuperMarket.Business.Concrete
             };
             _unitOfWork.BasketDetailDal.Add(basketDetail);
             _unitOfWork.SaveChanges();
-            var basketDetailList = GetBasketDetailList(basketId).Data;
-            return new SuccessDataResult<List<BasketDetail>>(basketDetailList);
-        }
-
-        public IDataResult<List<BasketDetail>> CheckBasketDetailToProduct(int productId, int basketId)
-        {
-            var basketDetailCheckProduct = GetBasket(productId, basketId).Data;
-            if (basketDetailCheckProduct != null)
-            {
-                basketDetailCheckProduct.Amount++;
-                basketDetailCheckProduct.TotalPrice = basketDetailCheckProduct.Amount * basketDetailCheckProduct.Price;
-                _unitOfWork.BasketDetailDal.Update(basketDetailCheckProduct);
-                _unitOfWork.SaveChanges();
-            }
-
             var basketDetailList = GetBasketDetailList(basketId).Data;
             return new SuccessDataResult<List<BasketDetail>>(basketDetailList);
         }

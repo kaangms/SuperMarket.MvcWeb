@@ -1,4 +1,5 @@
-﻿using Core.Entities.Abstract;
+﻿using System.Collections.Generic;
+using Core.Entities.Abstract;
 using SuperMarket.Entities.Concrete;
 
 namespace SuperMarket.Entities.Dtos
@@ -9,4 +10,5 @@ namespace SuperMarket.Entities.Dtos
         public BasketDetail BasketDetail { get; set; }
         public Product Product { get; set; }
     }
+
 }
