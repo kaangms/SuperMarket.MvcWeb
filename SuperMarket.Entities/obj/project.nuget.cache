@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ML8XXs/dFrIimtMF5dAR6GPHAPE+kabfIASLsVBqXQ/RDzspTILntTmtz7lZLo+KDmyFxmfaJVf7/XEBkRu+hw==",
+  "dgSpecHash": "Aa2RrcG+rtZR2b6L2QsAEi8jJEmnVAksOojkVkVV8fN0hT4Nnh/Pd2wj2VfUZr4V/fUoPi37UZTwhPMmZB5nyQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\SuperMarket.Entities\\SuperMarket.Entities.csproj",
+  "projectFilePath": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\SuperMarket.Entities\\SuperMarket.Entities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hkgms\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\hkgms\\.nuget\\packages\\microsoft.aspnetcore.http\\1.1.0\\microsoft.aspnetcore.http.1.1.0.nupkg.sha512",

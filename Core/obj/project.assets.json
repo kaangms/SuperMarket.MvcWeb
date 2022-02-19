@@ -3003,11 +3003,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\Core\\Core.csproj",
+      "projectUniqueName": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\Core\\Core.csproj",
+      "projectPath": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\hkgms\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\Core\\obj\\",
+      "outputPath": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hkgms\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3085,7 +3085,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }

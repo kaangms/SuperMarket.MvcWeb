@@ -74,7 +74,6 @@ namespace SuperMarket.Business.Concrete
           var product=  GetById(productId).Data;
          var result= Remove(product);
          if (result.Success) _unitOfWork.SaveChanges();
-
          return result;
         }
 

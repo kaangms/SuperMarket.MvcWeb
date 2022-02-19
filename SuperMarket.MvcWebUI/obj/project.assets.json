@@ -9270,11 +9270,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\SuperMarket.MvcWebUI\\SuperMarket.MvcWebUI.csproj",
+      "projectUniqueName": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\SuperMarket.MvcWebUI\\SuperMarket.MvcWebUI.csproj",
       "projectName": "SuperMarket.MvcWebUI",
-      "projectPath": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\SuperMarket.MvcWebUI\\SuperMarket.MvcWebUI.csproj",
+      "projectPath": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\SuperMarket.MvcWebUI\\SuperMarket.MvcWebUI.csproj",
       "packagesPath": "C:\\Users\\hkgms\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\SuperMarket.MvcWebUI\\obj\\",
+      "outputPath": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\SuperMarket.MvcWebUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hkgms\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9291,11 +9291,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\SuperMarket.Business\\SuperMarket.Business.csproj": {
-              "projectPath": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\SuperMarket.Business\\SuperMarket.Business.csproj"
+            "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\SuperMarket.Business\\SuperMarket.Business.csproj": {
+              "projectPath": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\SuperMarket.Business\\SuperMarket.Business.csproj"
             },
-            "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\SuperMarket.DataAccess\\SuperMarket.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\hkgms\\source\\repos\\SuperMarket.MvcWeb\\SuperMarket.DataAccess\\SuperMarket.DataAccess.csproj"
+            "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\SuperMarket.DataAccess\\SuperMarket.DataAccess.csproj": {
+              "projectPath": "D:\\Project\\_MyRepository\\C#\\SuperMarket.MvcWeb\\SuperMarket.DataAccess\\SuperMarket.DataAccess.csproj"
             }
           }
         }
@@ -9349,7 +9349,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -63,9 +63,8 @@ namespace Core.Utilities.Security.Jwt
 
         public ClaimsPrincipal CreateClaimsPrincipal(User user)
         {
-            ;
-            var useridentity = new ClaimsIdentity(SetClaims(user), "Login");
-            var claimsPrincipal = new ClaimsPrincipal(useridentity);
+            var userIdentity = new ClaimsIdentity(SetClaims(user), "Login");
+            var claimsPrincipal = new ClaimsPrincipal(userIdentity);
             return claimsPrincipal;
         }
     }

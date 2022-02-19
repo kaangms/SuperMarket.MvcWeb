@@ -6,6 +6,7 @@ using SuperMarket.Entities.Concrete;
 using SuperMarket.Entities.Dtos;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Utilities.BusinessRules;
 using SuperMarket.Business.Constants;
 
 namespace SuperMarket.Business.Concrete
@@ -38,8 +39,10 @@ namespace SuperMarket.Business.Concrete
         }
         private IResult AddBasket(int userId, int productId)
         {
+            var result = BusinessRules.Run(CheckProductStockAmount(productId));
+            if (result != null) return result;
+
             var basket = CheckBasket(userId).Data;
-            if (CheckProductStockAmount(productId)) return new ErrorResult(Messages.ErrorMessageForNullStock);
             var basketDetail = _basketDetailService.AddToBasketDetail(productId, basket.Id).Data;
             UpdateBasket(basket, basketDetail);
             _unitOfWork.SaveChanges();
@@ -47,9 +50,11 @@ namespace SuperMarket.Business.Concrete
         }
 
 
-        private bool CheckProductStockAmount(int productId)
+        private IResult CheckProductStockAmount(int productId)
         {
-            return _unitOfWork.ProductDal.Get(p => p.Id == productId).StockAmount <= 0;
+            return _unitOfWork.ProductDal.Get(p => p.Id == productId).StockAmount <= 0
+                ? new ErrorResult(Messages.ErrorMessageForNullStock)
+                :new SuccessResult();
         }
 
         private IDataResult<Basket> CheckBasket(int userId)
